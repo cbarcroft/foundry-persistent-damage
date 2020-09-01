@@ -117,7 +117,7 @@ const removeEffect = (token, effectId) => {
 }
 
 export function ready() {
-  console.log("Persistent Damage | Ready version 2.2.3");
+  console.log("Persistent Damage | Ready from github");
 
   // check for failed registered settings
   let hasErrors = false;
