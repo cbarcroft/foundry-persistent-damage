@@ -18,5 +18,5 @@
 	"esmodules": ["./src/index.js"],
 	"styles": ["./css/module-settings.css", "./css/default.css", "./src/tokenizer/tokenizer.css"],
 	"packs": [],
-	"manifest": "https://github.com/cbarcroft/foundry-persistent-damage/blob/master/module.json"
+	"manifest": "https://raw.githubusercontent.com/cbarcroft/foundry-persistent-damage/master/module.json"
 }
