@@ -2,7 +2,7 @@
 	"name": "persistentdamage",
 	"title": "Persistent Damage",
 	"description": "Attempt at a persistent damage module",
-	"version": "2.2.1",
+	"version": "2.2.2",
 	"minimumCoreVersion": "0.5.5",
 	"compatibleCoreVersion": "0.6.4",
 	"author": "cbarcroft",
@@ -17,5 +17,6 @@
 	}],
 	"esmodules": ["./src/index.js"],
 	"styles": ["./css/module-settings.css", "./css/default.css", "./src/tokenizer/tokenizer.css"],
-	"packs": []
+	"packs": [],
+	"manifest": "https://github.com/cbarcroft/foundry-persistent-damage/blob/master/module.json"
 }
