@@ -2,7 +2,7 @@
 	"name": "persistentdamage",
 	"title": "Persistent Damage",
 	"description": "Attempt at a persistent damage module",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"minimumCoreVersion": "0.5.5",
 	"compatibleCoreVersion": "0.6.4",
 	"author": "cbarcroft",
