@@ -64,12 +64,16 @@
     /* Safari, Android, iOS */ url("./fonts/roboto-condensed-v18-latin-700.svg#RobotoCondensed") format("svg"); /* Legacy iOS */
 }
 
-#vtta-tokenizer div.avatar div.view > div > canvas {
-  width: 400px;
-  height: 400px;
+
+.pd-type-label {
+  display: inline-block;
+  width: 25%;
 }
 
-#vtta-tokenizer div.token div.view > div > canvas {
-  width: 400px;
-  height: 400px;
+.pd-bomb-option {
+  display: flex;
+}
+
+.pd-bomb-icon {
+  margin-right: 3px;
 }

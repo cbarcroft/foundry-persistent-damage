@@ -1,23 +1,49 @@
 <div class="pf2e chat-card weapon-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <header class="card-header flexrow">
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
-        <h3>{{bomb.data.name}}</h3>
+        <h3>{{item.name}}</h3>
     </header>
 
-    <div class="card-content">{{{ item.description.value }}}</div>
+    <div class="card-content">{{{ item.data.description.value }}}</div>
     <div class="card-content">{{{ item.data.damage.value }}}</div>
-    <div class="card-content">Persistent: {{{ pd.dice }}}{{{ pd.die }}} {{{ pd.damageType }}}</div>
+
+
+    {{#if pd}}
+        <div class="card-content">Persistent: {{{ pd.dice }}}{{{ pd.die }}} {{{ pd.damageType }}}</div>
+    {{/if}}
 
     <div class="card-buttons">
         <div class="card-buttons-multiattack">
             <button data-action="weaponAttack">{{localize "PF2E.AttackLabel"}}</button>
-            <button data-action="weaponAttack2">{{data.map2}}</button>
-            <button data-action="weaponAttack3">{{data.map3}}</button>
+            <button data-action="weaponAttack2">{{MAP.map2}}</button>
+            <button data-action="weaponAttack3">{{MAP.map3}}</button>
         </div>
+        <!--
         <div class="card-buttons-two-column">
             <button data-action="weaponDamage">{{localize "PF2E.DamageLabel"}}</button>
             <button data-action="criticalDamage">{{localize "PF2E.CriticalDamageLabel"}}</button>
         </div>
+        -->
+        <div class="card-buttons-two-column">
+            <button 
+                class="bomb-hit" 
+                data-bomb-id="{{item._id}}" 
+                data-bomb-attacker="{{actor.id}}" 
+                data-bomb-target="{{token.id}}"
+                data-bomb-options="{{options}}"
+                >
+                Hit
+            </button>
+            <button 
+                class="bomb-miss" 
+                data-bomb-id="{{item._id}}" 
+                data-bomb-attacker="{{actor.id}}" 
+                data-bomb-target="{{token.id}}"
+                data-bomb-options="{{options}}"
+                >
+                Miss
+            </button>
+        </div>        
     </div>
 
     <footer class="card-footer">

@@ -1,5 +1,7 @@
-if (!token){
-  ui.notifications.warn("You must have a target selected.");
+const targets = game.user.targets
+
+if (targets.size <= 0){
+  ui.notifications.warn("You must have at least one target selected.");
 } else {
   let toChat = (content, rollString) => {
       let chatData = {
@@ -44,10 +46,21 @@ if (!token){
     return options
   }
 
+  let targetNames = () => {
+    let names = []
+    for (let target of targets){
+      names.push(target.name)
+    }
+
+    return names.join(', ')
+  }
+
   let applyChanges = false;
   new Dialog({
     title: `Apply Persistent Damage`,
     content: `
+      <div>Targets: <span style="font-weight: bold;">${targetNames()}</span></div>
+      <hr>
       <div>Select a type and amount.<div>
       <hr/>
       <form>
@@ -85,10 +98,9 @@ if (!token){
         let pd_amt = html.find('[name="pd_amt"]')[0].value;
         let pd_src = html.find('[name="pd_src"]')[0].value;
 
-        game.persistentdamage.applyPersistentDamage(token, pd_src, pd_amt, pd_type)
-
-        let msg = `${token.name} is now taking ${pd_amt} persistent ${pd_type} damage from ${pd_src}.`
-        game.persistentdamage.toChat(msg)
+        for (let target of targets){
+          game.persistentdamage.applyPersistentDamage(target, pd_src, pd_amt, pd_type)
+        }
       }
     }
   }).render(true);

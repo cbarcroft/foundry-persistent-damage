@@ -10,14 +10,11 @@
 		"lang": "en",
 		"name": "English",
 		"path": "lang/en.json"
-	}, {
-		"lang": "de",
-		"name": "Deutsch",
-		"path": "lang/de.json"
 	}],
 	"esmodules": ["./src/index.js"],
-	"styles": ["./css/module-settings.css", "./css/default.css", "./src/tokenizer/tokenizer.css"],
+	"styles": ["./css/module-settings.css", "./css/default.css"],
 	"packs": [],
+	"socket": true,
 	"manifest": "https://raw.githubusercontent.com/cbarcroft/foundry-persistent-damage/master/module.json",
 	"download": "https://github.com/cbarcroft/foundry-persistent-damage/releases/download/v0.0.1/module.zip"
 }

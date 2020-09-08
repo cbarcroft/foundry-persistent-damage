@@ -28,3 +28,15 @@ export function tokenOrId(token) {
 export function randomId() {
    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
+
+export function setStatus(token, img, state){
+  if (state === null) token.toggleEffect(img);
+  // Forced state on
+  else if (state && !token.data.effects.includes(img)) {
+    token.toggleEffect(img);
+  }
+  // Forced state off
+  else if (!state && token.data.effects.includes(img)) {
+    token.toggleEffect(img);
+  }
+}

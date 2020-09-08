@@ -1,0 +1,64 @@
+<div class="pf2e chat-card weapon-card">
+    <header class="card-header flexrow">
+        <h3>{{bomb.data.name}} - Hit!</h3>
+    </header>
+
+    <div class="card-content">{{ attacker.name }} -> {{ target.name }}</div>
+
+    {{#if directDamage}}
+	    <div class="card-content">
+	    	<label class="pd-type-label">Direct:</label>
+	    	<input id="{{id}}-direct-dmg" value="{{ directDamage.total }}" style="display: inline-block; width: 15%;" />{{ pd.damageType }}     
+	    	<button 
+	    		class="dice-total-fullDamage-btn direct-apply" 
+	    		data-target='{{target.id}}'
+	    		data-dmg-input='{{id}}-direct-dmg' 
+	    		data-dmg-type='{{pd.damageType}}' 
+	    		style="width: 40px; height:16px; font-size:10px;line-height:1px">
+	    		Apply
+	    	</button>
+		</div>
+	{{/if}}
+
+    {{#if splashDamage}}
+	    <div class="card-content">
+	    	<label class="pd-type-label">Splash:</label>
+	    	<input id="{{id}}-splash-dmg" value="{{splashDamage}}" style="display: inline-block; width: 15%;" />{{ pd.damageType }}     
+	    	<button 
+	    		class="dice-total-fullDamage-btn splash-apply" 
+	    		data-target='{{target.id}}'
+	    		data-dmg-input='{{id}}-splash-dmg' 
+	    		data-dmg-type='{{pd.damageType}}' 
+	    		style="width: 40px; height:16px; font-size:10px;line-height:1px">
+	    		Apply
+	    	</button>
+		</div>
+	{{/if}}	
+
+    {{#if pd}}
+	    <div class="card-content">
+	    	<label class="pd-type-label">Persistent:</label>
+	    	<input id="{{id}}-persistent-dmg" value="{{ pd.dice}}{{pd.die}}{{#if pd.bonusDamage}}{{#if pd.die}}+{{/if}}{{pd.bonusDamage}}{{/if}}" style="display: inline-block; width: 15%;" />{{ pd.damageType }}     
+	    	<button 
+	    		class="dice-total-fullDamage-btn pd-apply" 
+	    		data-target='{{target.id}}' 
+	    		data-pd-source='{{bomb.name}}' 
+	    		data-pd-dmg-input='{{id}}-persistent-dmg' 
+	    		data-pd-dmg-type='{{pd.damageType}}' 
+	    		style="width: 40px; height:16px; font-size:10px;line-height:1px">
+	    		Apply
+	    	</button>
+		</div>
+	{{/if}}
+
+	{{#if additionalEffects}}
+	    <div class="card-content">
+	    	{{#additionalEffects}}
+	    		{{.}}
+	    	{{/additionalEffects}}
+		</div>
+	{{/if}}
+
+    <footer class="card-footer">
+    </footer>
+</div>
