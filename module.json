@@ -2,7 +2,7 @@
 	"name": "persistentdamage",
 	"title": "Persistent Damage",
 	"description": "Attempt at a persistent damage module",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"minimumCoreVersion": "0.5.5",
 	"compatibleCoreVersion": "0.6.5",
 	"author": "cbarcroft",
@@ -16,5 +16,5 @@
 	"packs": [],
 	"socket": true,
 	"manifest": "https://raw.githubusercontent.com/cbarcroft/foundry-persistent-damage/master/module.json",
-	"download": "https://github.com/cbarcroft/foundry-persistent-damage/releases/download/v0.0.2/module.zip"
+	"download": "https://github.com/cbarcroft/foundry-persistent-damage/releases/download/v0.0.3/module.zip"
 }
