@@ -77,3 +77,9 @@
 .pd-bomb-icon {
   margin-right: 3px;
 }
+
+.card-buttons-three-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 4px;
+}

@@ -24,7 +24,7 @@
             <button data-action="criticalDamage">{{localize "PF2E.CriticalDamageLabel"}}</button>
         </div>
         -->
-        <div class="card-buttons-two-column">
+        <div class="card-buttons-three-grid">
             <button 
                 class="bomb-hit" 
                 data-bomb-id="{{item._id}}" 
@@ -33,6 +33,15 @@
                 data-bomb-options="{{options}}"
                 >
                 Hit
+            </button>
+            <button 
+                class="bomb-crit" 
+                data-bomb-id="{{item._id}}" 
+                data-bomb-attacker="{{actor.id}}" 
+                data-bomb-target="{{token.id}}"
+                data-bomb-options="{{options}}"
+                >
+                Crit
             </button>
             <button 
                 class="bomb-miss" 

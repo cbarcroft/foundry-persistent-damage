@@ -245,11 +245,6 @@ const removeAllPersistentDamageFromToken = (token) => {
       removePersistentDamage(tok, key)
     }
   }
-
-  // Force remove all icons, as they get stuck occasionally
-  for (let effect of allEffects) {
-    removePersistentDamage(tok, key)
-  }
 }
 
 export function ready() {

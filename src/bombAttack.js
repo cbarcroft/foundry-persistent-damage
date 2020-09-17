@@ -25,6 +25,20 @@ const getPersistentDamageFromBombForActor = (bomb, attacker, options = {}) => {
   	pd.bonusDamage = splashDamage
   }
 
+  if (options.critical) {
+    if (pd.bonusDamage){
+      console.log(`Doubling bonus damage from ${pd.bonusDamage}`)
+      pd.bonusDamage = 2 * pd.bonusDamage
+      console.log(`Doubled to ${pd.bonusDamage}`)
+    }
+
+    if (pd.dice){
+      console.log(`Doubling bonus dice from ${pd.dice}`)
+      pd.dice = 2 * pd.dice
+      console.log(`Doubled to ${pd.dice}`)
+    }
+  }
+
   return pd
 }
 
@@ -36,6 +50,10 @@ const getDirectDamageFromBombForActor = (bomb, attacker, options = {}) => {
 	if (bonusDamage){
 		rollString += `+ ${bonusDamage}`
 	}
+
+  if (options.critical){
+    rollString = `2*(${rollString})`
+  }
 
 	let r = new Roll(rollString)
 
@@ -119,6 +137,78 @@ const bombHit = (bombId, attackerId, targetId, options) => {
   });
 }
 
+const bombCrit = (bombId, attackerId, targetId, options) => {
+  let attacker = game.actors.find( a => a._id == attackerId)
+  let target = canvas.tokens.get(targetId)
+  let bomb = attacker.items.find((i) => i._id === bombId )
+
+  options.critical = true
+
+  let splashDamage = getSplashDamageFromBombForActor(bomb, attacker, options)
+  let pd = getPersistentDamageFromBombForActor(bomb, attacker, options)
+
+  // Roll damage
+  let directDamageRoll = getDirectDamageFromBombForActor(bomb, attacker, options)
+
+  let additionalEffects = []
+  if(options.debilitating){
+    let attackerClassDC = attacker.data.data.attributes.classDC.value
+    additionalEffects.push(`Debilitating: Target makes a DC${attackerClassDC} fortitude save, or suffers the following: ${options.debilitating}`)
+  }
+
+  const templateData = {
+    id: randomId(),
+    attacker: attacker,
+    target: target,
+    bomb: bomb,
+    directDamage: directDamageRoll,
+    pd: pd,
+    splashDamage: splashDamage,
+    additionalEffects: additionalEffects
+  };
+
+  // Render the template
+  renderTemplate("modules/persistentdamage/templates/bomb-crit-damage-card.html", templateData)
+  .then((rendered) => {
+    toChat(rendered)
+  });
+}
+
+const bombMiss = (bombId, attackerId, targetId, options) => {
+  let attacker = game.actors.find( a => a._id == attackerId)
+  let target = canvas.tokens.get(targetId)
+  let bomb = attacker.items.find((i) => i._id === bombId )
+
+  let splashDamage = getSplashDamageFromBombForActor(bomb, attacker, options)
+  let pd = getPersistentDamageFromBombForActor(bomb, attacker, options)
+
+  // Roll damage
+  let directDamageRoll = getDirectDamageFromBombForActor(bomb, attacker, options)
+
+  let additionalEffects = []
+  if(options.debilitating){
+    let attackerClassDC = attacker.data.data.attributes.classDC.value
+    additionalEffects.push(`Debilitating: Target makes a DC${attackerClassDC} fortitude save, or suffers the following: ${options.debilitating}`)
+  }
+
+  const templateData = {
+    id: randomId(),
+    attacker: attacker,
+    target: target,
+    bomb: bomb,
+    directDamage: directDamageRoll,
+    pd: pd,
+    splashDamage: splashDamage,
+    additionalEffects: additionalEffects
+  };
+
+  // Render the template
+  renderTemplate("modules/persistentdamage/templates/bomb-miss-damage-card.html", templateData)
+  .then((rendered) => {
+    toChat(rendered)
+  });
+}
+
 $(document).on('click', '.bomb-hit', function(){
   let self = $(this)
 
@@ -128,6 +218,17 @@ $(document).on('click', '.bomb-hit', function(){
   let options = self.data('bomb-options')
 
   bombHit(bombId, attacker, target, options)
+})
+
+$(document).on('click', '.bomb-crit', function(){
+  let self = $(this)
+
+  let bombId = self.data('bomb-id')
+  let attacker = self.data('bomb-attacker')
+  let target = self.data('bomb-target')
+  let options = self.data('bomb-options')
+
+  bombCrit(bombId, attacker, target, options)
 })
 
 $(document).on('click', '.bomb-miss', function(){
