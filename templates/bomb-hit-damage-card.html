@@ -49,7 +49,7 @@
     {{#if pd}}
 	    <div class="card-content">
 	    	<label class="pd-type-label">Persistent:</label>
-	    	<input id="{{id}}-persistent-dmg" value="{{ pd.dice}}{{pd.die}}{{#if pd.bonusDamage}}{{#if pd.die}}+{{/if}}{{pd.bonusDamage}}{{/if}}" style="display: inline-block; width: 15%;" />{{ pd.damageType }}     
+	    	<input id="{{id}}-persistent-dmg" value="{{ pd.dice}}{{pd.die}}{{#if pd.bonusDamage}}{{#if pd.dice}}+{{/if}}{{pd.bonusDamage}}{{/if}}" style="display: inline-block; width: 15%;" />{{ pd.damageType }}     
 	    	<button 
 	    		class="dice-total-fullDamage-btn pd-apply" 
 	    		data-target='{{target.id}}' 

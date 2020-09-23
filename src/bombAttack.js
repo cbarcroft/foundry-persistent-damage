@@ -7,7 +7,7 @@ const getPersistentDamageFromBomb = (bomb) => {
   let pd = null
   for(let prop of props){
     if (bomb.data.data[prop].value.toLowerCase() == "persistent"){
-      pd = bomb.data.data[prop]
+      pd = JSON.parse(JSON.stringify(bomb.data.data[prop])); //break reference to actual property so we can modify it later
       break
     }
   }
@@ -19,10 +19,13 @@ const getPersistentDamageFromBombForActor = (bomb, attacker, options = {}) => {
   let pd = getPersistentDamageFromBomb(bomb)
 
   if ( options.stickyBomb ){
+    console.log("Applying sticky bomb")
   	if (!pd){ pd = { damageType: bomb.data.data.damage.damageType } } // Fix nulls for bombs without inherent persistence
 
   	let splashDamage = getSplashDamageFromBombForActor(bomb, attacker, options)
   	pd.bonusDamage = splashDamage
+  } else {
+    // Reset bonus damage
   }
 
   if (options.critical) {
